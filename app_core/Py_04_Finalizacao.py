@@ -1,3 +1,7 @@
+# MÓDULO 4 - FINALIZAÇÃO
+import sys
+import time
+
 import Py_01_FormaDePagamento_Quantidade, Py_02_Selecionar_Tipo_Combustivel, Py_03_Abastecimento
 py_01 = Py_01_FormaDePagamento_Quantidade
 py_02 = Py_02_Selecionar_Tipo_Combustivel
@@ -19,7 +23,16 @@ while py_01 and py_02 and py_03:
             break
 
         if decisao == 0:
-            print('\n' + '---------- OBRIGADO POR UTILIZAR O POSTO DE COMBUSTÍVEL ----------\n')
+            print(('-' * 60) + '\nSEU RECIBO ESTÁ SENDO IMPRESSO.\n'
+                  'Aguarde, processando...', end=' ')
+
+            for i in range(0, 6):
+                print(i, end=' ')
+                sys.stdout.flush()
+                time.sleep(1)
+
+            print('\n' + ('-' * 60) +
+                  '\n\n\n---------- OBRIGADO POR UTILIZAR O POSTO DE COMBUSTÍVEL ----------\n')
             break
 
         else:

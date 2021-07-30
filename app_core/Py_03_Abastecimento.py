@@ -4,15 +4,15 @@ import time, sys, signal
 import Py_01_FormaDePagamento_Quantidade, Py_02_Selecionar_Tipo_Combustivel
 from app_utils import funcao_03_contadores
 
-py_01=Py_01_FormaDePagamento_Quantidade
-py_02=Py_02_Selecionar_Tipo_Combustivel
+py_01 = Py_01_FormaDePagamento_Quantidade
+py_02 = Py_02_Selecionar_Tipo_Combustivel
 
 # BLOCO 1 - TEMPO LIMITE DE SESSÃO -----------------------------------------------------------------------
-contador = 0
-# funcao_03_contadores.timer(contador)
 
 # BLOCO 2 - CHECKOUT -----------------------------------------------------------------------
-while contador < 30:
+while True:
+    contador = 0
+    funcao_03_contadores.timer(contador)
 
     print('\n' + 'CHECKOUT:\n'
           '---- Meio de pagamento:', py_01.lista_entrada[py_01.entrada], '\n'
@@ -39,12 +39,16 @@ while contador < 30:
 
             break
 
+        elif confirmacao == 2:
+            print(('-' * 60) + '\nPARA VALORES INCORRETOS REPITA O PROCESSO.\n' + ('-' * 60))
+            continue
+
         elif confirmacao == 0:
-            print(('-' * 60) + '\nSUA SESSÃO FOI ENCERRADA! AGRADECEMOS A COMPREENSÃO.\n' + ('-' * 60))
+            print('\n---------- OBRIGADO POR UTILIZAR O POSTO DE COMBUSTÍVEL ----------\n')
             break
 
         else:
-            print(('-' * 60) + '\nVERIFIQUE O CHECKOUT. EM CASO DE ERRO REPITA O PROCESSO.\n' + ('-' * 60))
+            print(('-' * 60) + '\nOPÇÃO INVÁLIDA! POR FAVOR ESCOLHA NOVAMENTE.\n' + ('-' * 60))
             continue
 
     except ValueError:

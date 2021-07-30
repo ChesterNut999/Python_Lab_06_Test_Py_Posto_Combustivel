@@ -3,7 +3,7 @@
 import time, sys
 import Py_01_FormaDePagamento_Quantidade
 
-# BLOCO 1 - SELECÃO E VALIDAÇAO DO TIPO DE COMBÚSTIVEL -----------------------------------------------------------------------
+# BLOCO 1 - SELECÃO DE COMBUSTIVEL E VALIDAÇAO DE ESCOLHA -----------------------------------------------------------------------
 py_01 = Py_01_FormaDePagamento_Quantidade
 while py_01:
     try:
@@ -18,7 +18,6 @@ while py_01:
                                 'DIGITE A OPÇÃO DESEJADA: '))
 
         if combustivel == 1 or combustivel == 2 or combustivel == 3 or combustivel == 4:
-
             print(('-' * 60) + '\n' + lista_combustivel[combustivel].upper() + ' SELECIONADO!\n'
                    'Aguarde, processando...', end=' ')
             for i in range(0, 6):
@@ -30,7 +29,7 @@ while py_01:
             break
 
         elif combustivel == 0:
-            print(('-' * 60) + '\nSUA SESSÃO FOI ENCERRADA! AGRADECEMOS A COMPREENSÃO.\n' + ('-' * 60))
+            print('\n---------- OBRIGADO POR UTILIZAR O POSTO DE COMBUSTÍVEL ----------\n')
             break
 
         else:

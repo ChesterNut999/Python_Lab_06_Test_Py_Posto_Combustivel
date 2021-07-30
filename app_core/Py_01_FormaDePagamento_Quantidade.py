@@ -4,7 +4,6 @@ from _datetime import datetime
 print('\n' + '---------- SEJA BEM VINDO AO POSTO DE COMBUSTÍVEL ----------')
 
 # BLOCO 1 - VALIDAÇÃO DO MEIO DE PAGAMENTO -----------------------------------------------------------------------
-
 while True:
     try:
         lista_entrada = ["sair", "Cartão", "QR Code", "dinheiro"]
@@ -21,7 +20,7 @@ while True:
             break
 
         elif entrada == 0:
-            print(('-' * 60) + '\nSUA SESSÃO FOI ENCERRADA! AGRADECEMOS A COMPREENSÃO.\n' + ('-' * 60))
+            print('\n---------- OBRIGADO POR UTILIZAR O POSTO DE COMBUSTÍVEL ----------\n')
             break
 
         else:
@@ -31,8 +30,11 @@ while True:
     except ValueError:
         print(('-' * 60) + '\nVALOR INVÁLIDO! POR FAVOR ESCOLHA NOVAMENTE.\n' + ('-' * 60))
 
-# BLOCO 2 - VALIDAÇÃO DA FORMA DE PAGAMENTO -----------------------------------------------------------------------
+    except BaseException:
+        print(('-' * 60) + '\nERRO DESCONHECIDO! CONTACTE O ADMINISTRADOR DO SISTEMA.\n' + ('-' * 60))
 
+
+# BLOCO 2 - VALIDAÇÃO DA FORMA DE PAGAMENTO SE CARTÃO -----------------------------------------------------------------------
 while True:
     try:
         lista_bandeira = ["sair", "MasterCard", "Visa"]
@@ -50,7 +52,7 @@ while True:
                 break
 
             elif bandeira == 0:
-                print(('-' * 60) + '\nSUA SESSÃO FOI ENCERRADA! AGRADECEMOS A COMPREENSÃO.\n' + ('-' * 60))
+                print('\n---------- OBRIGADO POR UTILIZAR O POSTO DE COMBUSTÍVEL ----------\n')
                 break
 
             else:
@@ -60,10 +62,13 @@ while True:
     except ValueError:
         print(('-' * 60) + '\nVALOR INVÁLIDO! POR FAVOR ESCOLHA NOVAMENTE.\n' + ('-' * 60))
 
-# BLOCO 3 - QUANTIDADE E PREÇO DO COMBUSTIVEL -----------------------------------------------------------------------
+    except BaseException:
+        print(('-' * 60) + '\nERRO DESCONHECIDO! CONTACTE O ADMINISTRADOR DO SISTEMA.\n' + ('-' * 60))
+
+# BLOCO 3 - QUANTIDADE DO COMBUSTIVEL -----------------------------------------------------------------------
 while True:
     try:
-        valorCombustivel = 4.50
+        valorCombustivel = 6.0
         print('\n' + 'INFORME A QUANTIDADE DE GALOES DE COMBÚSTIVEL'
               '\nPREÇO ' + str(valorCombustivel) + ', HOJE ' + str(datetime.now()) + ', AS ' +'\n')
 
@@ -77,7 +82,7 @@ while True:
             break
 
         elif qtdCombustivel == 0:
-            print(('-' * 60) + '\nSUA SESSÃO FOI ENCERRADA! AGRADECEMOS A COMPREENSÃO..\n' + ('-' * 60))
+            print('\n---------- OBRIGADO POR UTILIZAR O POSTO DE COMBUSTÍVEL ----------\n')
             break
 
         else:
@@ -87,3 +92,5 @@ while True:
     except ValueError:
         print(('-' * 60) + '\nVALOR INVÁLIDO! POR FAVOR ESCOLHA NOVAMENTE.\n' + ('-' * 60))
 
+    except BaseException:
+        print(('-' * 60) + '\nERRO DESCONHECIDO! CONTACTE O ADMINISTRADOR DO SISTEMA.\n' + ('-' * 60))
