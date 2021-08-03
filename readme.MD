@@ -29,19 +29,22 @@ BLOCOS DE TRANSIÇÃO: <br>
  O menu deve apresentar 4 opções
 -----------------------------------------------------------------
  CT_01_CAT_02 
- Se cartão, então passar para selecionar bandeira
+ Se cartão, então selecionar bandeira
     
     CT_01_CAT_02.1 
     O meu deve apresentar 3 opções
    
     CT_01_CAT_02.2
-    Se cartão e bandeira válidos, passar para QUANTIDADE_COMBUSTIVEL
+    Se bandeira válida, passar para QUANTIDADE_COMBUSTIVEL
 ----------------------------------------------------------------- 
  CT_01_CAT_03
  Se QR Code verdadeiro, passar para QUANTIDADE_COMBUSTIVEL
-
+----------------------------------------------------------------- 
  CT_01_CAT_04
  Se dinheiro, passar para QUANTIDADE_COMBUSTIVEL
+    
+    CT_01_CAT_04.1
+    Se 
 ```
 ### CT_02
 * No menu usuario seleciona a QUANTIDADE_COMBUSTIVEL
