@@ -1,27 +1,30 @@
 # MÓDULO 0 - MENU DE INICIALIZAÇAO
 import runpy, os
+import Py_01_FormaPagamento
+import Py_02_Qtd_Tipo_Combustivel
+import Py_03_Checkout_Abastecimento
+import Py_04_Finalizacao
 
-import Py_01_FormaPagamento as py1
-import Py_02_Qtd_Tipo_Combustivel as py2
-import Py_03_Checkout_Abastecimento as py3
-import Py_04_Finalizacao as py4
-
+# BLOCO 1 - EXECUÇAO DOS MODULOS
 if __name__ == '__main__':
-    os.system('clean')
+    runpy.run_module(mod_name=Py_01_FormaPagamento.entrada)
 
-    runpy.run_module(mod_name=py1)
+    if Py_02_Qtd_Tipo_Combustivel is True:
+        os.system('clear' or None)
+        runpy.run_module(mod_name=Py_03_Checkout_Abastecimento)
 
-    if py1 is True:
-        os.system('clean')
-        runpy.run_module(mod_name=py2)
+        if Py_03_Checkout_Abastecimento is True:
+            os.system('clear' or None)
+            runpy.run_module(mod_name=Py_04_Finalizacao)
 
-        if py2 is True:
-            os.system('clean')
-            runpy.run_module(mod_name=py3)
+            if Py_04_Finalizacao is True:
+                os.system('clear' or None)
 
-            if py3 is True:
-                os.system('clean')
-                runpy.run_module(mod_name=py4)
+            elif Py_04_Finalizacao.decisao == 0:
+                exit(0)
+
+        elif Py_03_Checkout_Abastecimento.checkout == 0:
+            exit(0)
 
     else:
         exit(0)
