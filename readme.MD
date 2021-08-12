@@ -6,11 +6,11 @@ output: html document
 ```
 ---
 BLOCOS DE TRANSIÇÃO: <br>
-<a name="MP">MEIO_PAGAMENTO<a/> <br>
-<a name="QC">QUANTIDADE_COMBUSTIVEL</a> <br>
-<a name="TC">TIPO_COMBUSTIVEL</a> <br>
-<a name="CC">CONFIRMA_CHECKOUT</a><br>
-<a name="FS">FINALIZA_SESSAO</a>
+[MEIO_PAGAMENTO](#mp) <br>
+[QUANTIDADE_COMBUSITOVEL](#qc) <br>
+[TIPO_COMBUSTIVEL](#tc) <br>
+[CONFIRMAR_CHECKOUT](#cc) <br>
+[FINALIZAR_SESSAO](#fs)
 ---
 
 # LABORATÓRIO PYTHON - POSTO DE COMBÚSTIVEL
@@ -22,53 +22,63 @@ BLOCOS DE TRANSIÇÃO: <br>
 
 ## CONDIÇÕES DE TESTE (CT) E CASOS DE TESTE (CAT) 
 ### CT_01
-* No menu o usuario seleciona [MEIO_PAGAMETO](MP)
+<a id="mp" name="mp"></a> 
+* No menu o usuario seleciona MEIO_PAGAMENTO
 #### CAT
 ```
  CT_01_CAT_01
- O menu deve apresentar 4 opções
+ O menu deve apresentar 3 opções
 -----------------------------------------------------------------
  CT_01_CAT_02 
- Se cartão, então selecionar bandeira
+ Se cartão, então seleciona bandeira
     
     CT_01_CAT_02.1 
-    O meu deve apresentar 3 opções
+    O menu deve apresentar 3 opções
    
     CT_01_CAT_02.2
-    Se bandeira válida, passar para QUANTIDADE_COMBUSTIVEL
+    Se bandeira válida, passa para QUANTIDADE_COMBUSTIVEL
 ----------------------------------------------------------------- 
  CT_01_CAT_03
- Se QR Code verdadeiro, passar para QUANTIDADE_COMBUSTIVEL
+ Se QR Code verdadeiro, passa para QUANTIDADE_COMBUSTIVEL
 ----------------------------------------------------------------- 
  CT_01_CAT_04
- Se dinheiro, passar para QUANTIDADE_COMBUSTIVEL
+ Se dinheiro, passa para QUANTIDADE_COMBUSTIVEL
     
     CT_01_CAT_04.1
-    Se 
+    O menu deve apresentar 2 opções
+    
+    CT_01_CAT_04.2
+    Se escolher prosseguir, passa para QUANTIDADE_COMBUSTIVEL
 ```
 ### CT_02
+<a id="qc" name="qc"></a> 
 * No menu usuario seleciona a QUANTIDADE_COMBUSTIVEL
 #### CAT
-```
- 1. CT_02_CAT_01
- Usuário deve informar QUANTIDADE_COMBUSTIVEL entre um intervalo válido
-
+``` 
+ CT_02_CAT_01
+ O menu deve apresentar 2 opções
+ 
+    CT_02_CAT_01.01
+    Usuário deve informar QUANTIDADE_COMBUSTIVEL entre um intervalo válido 
+    
  2. CT_02_CAT_02
- Se QUANTIDADE_COMBUSTIVEL válido, passar para TIPO_COMBUSTIVEL
+ Se QUANTIDADE_COMBUSTIVEL válida, passa para TIPO_COMBUSTIVEL
 ```
 
 ### CT_03
-* No menu usuario seleciona o TIPO_COMBÚSTIVEL
+<a id="tc" name="tc"></a>
+* No menu usuario seleciona o TIPO_COMBUSTIVEL
 #### CAT
 ```
  CT_03_CAT_01
  O menu deve apresentar 5 opções
 
  CT_03_CAT_02
- Se TIPO_COMBUSTIVEL válido, passar para CONFIRMAR_CHECKOUT
+ Se TIPO_COMBUSTIVEL válido, passa para CONFIRMAR_CHECKOUT
 ```
 
 ### CT_04
+<a id="cc" name="cc"></a> 
 * Contador Timeout aparece na tela, usuário valida visualmente infomações e CONFIRMAR_CHECKOUT
 #### CAT
 ```
@@ -77,16 +87,17 @@ BLOCOS DE TRANSIÇÃO: <br>
  Timeout da sessão é 30 segundos e informações de checkout aparecem na tela
  
     CT_04_CAT_01.1
-    O menu deve apresentar 3 opções
+    O menu deve apresentar 2 opções
     
-    CT_04_CAT_01.2
-    Se usuário não CONFIRMAR_CHECKOUT sessão expira automaticamente
------------------------------------------------------------------
  CT_04_CAT_02
- Se CONFIRMAR_CHECKOUT válido, abastecer e passar para FINALIZAR_SESSAO
+ Se usuário não CONFIRMAR_CHECKOUT sessão expira automaticamente
+-----------------------------------------------------------------
+ CT_04_CAT_03
+ Se CONFIRMAR_CHECKOUT válido, abastece, imprime recibo e passa para FINALIZAR_SESSAO
 ```
 
 ### CT_05
+<a id="fs" name="fs"></a> 
 * Usuario recebe mensagem de conclusão e escolhe FINALIZAR_SESSAO ou voltar ao inicio
 #### CAT
 ```
@@ -95,6 +106,6 @@ BLOCOS DE TRANSIÇÃO: <br>
  O menu deve apresentar 2 opções
  
     CT_05_CAT_01.1
-    Se FINALIZAR_SESSAO, imprime recibo e sai do programa
+    Se FINALIZAR_SESSAO, sai do programa
 -----------------------------------------------------------------
 ```
