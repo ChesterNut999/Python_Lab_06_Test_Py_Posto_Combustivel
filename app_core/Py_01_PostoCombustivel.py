@@ -1,20 +1,25 @@
 # MÓDULO 1 - PROGRAMA
-import datetime, sys, time
+import datetime, sys, time, os
+import multiprocessing.process
+from multiprocessing import Process
+
 from typing import List
+from app_utils.funcao_03_checkout import contador as func3_contador
+from app_utils.funcao_03_checkout import entrada_usuario as func3_entrada
+
 
 # VARS
 entrada = None
 bandeira = None
 notas = None
 qtdCombustivel = None
-valorCombustivel = float(10.50)
+valorCombustivel = float(20)
 tipoCombustivel = None
 meioPagamento = None
-checkout = None
 decisao = None
 
 # LISTAS
-lista_entrada: List[str] = ["Cartão", "Dinheiro", "QR Code"]
+lista_entrada: List[str] = ["", "Cartão", "Dinheiro", "QR Code"]
 lista_bandeira: List[str] = ["Voltar", "MasterCard", "Visa"]
 lista_notas = ["Voltar", "Sim", 20, 50, 100]
 lista_qtdCombustivel = ["Voltar", 1, 20]
@@ -25,6 +30,8 @@ lista_checkout = ["Voltar", "Sim"]
 lista_decisao = ['Sair', 'Voltar']
 
 # MÓDULO 1 - MEIOS DE PAGAMENTO ----------------------------------------------------------
+os.system('clear')
+
 print('\nSEJA BEM VINDO AO POSTO DE COMBUSTÍVEL')
 
 while True:
@@ -43,7 +50,7 @@ while True:
 
     # SE CARTÃO, ESCOLHE BANDEIRA
     if entrada == 1:
-        print('\n' + ('-' * 60) + '\n' + lista_entrada[0].upper() + ' SELECIONADO!\n'
+        print('\n' + ('-' * 60) + '\n' + lista_entrada[entrada].upper() + ' SELECIONADO!\n'
               'Aguarde, processando...\n' + ('-' * 60))
 
         while True:
@@ -65,8 +72,8 @@ while True:
                         break
 
                 else:
-                        print('\n' + ('-' * 60) + '\nOPÇÃO INVÁLIDA! ESCOLHA NOVAMENTE.\n' + ('-' * 60))
-                        continue
+                    print('\n' + ('-' * 60) + '\nOPÇÃO INVÁLIDA! ESCOLHA NOVAMENTE.\n' + ('-' * 60))
+                    continue
 
             except BaseException:
                     print('\n' + ('-' * 60) + '\nOPÇÃO INVÁLIDA! ESCOLHA NOVAMENTE.\n' + ('-' * 60))
@@ -77,7 +84,7 @@ while True:
 
     # SE DINHEIRO, PROSSEGUE OU NÃO
     elif entrada == 2:
-        print('\n' + ('-' * 60) + '\n' + lista_entrada[1].upper() + ' SELECIONADO!\n'
+        print('\n' + ('-' * 60) + '\n' + lista_entrada[entrada].upper() + ' SELECIONADO!\n'
               'Aguarde, processando...\n' + ('-' * 60))
 
         while True:
@@ -110,9 +117,9 @@ while True:
         if notas == 0:
             continue
 
-    # SE QR Code, GERA E VALIDA
+    # SE QR Code, GERA E VALIDA (NÃO IMPLEMENTADO)
     elif entrada == 3:
-            print('\n' + ('-' * 60) + '\n' + lista_entrada[2].upper() + ' SELECIONADO!\n'
+            print('\n' + ('-' * 60) + '\n' + lista_entrada[entrada].upper() + ' SELECIONADO!\n'
                   'Aguarde, processando...\n' + ('-' * 60))
             break
 
@@ -141,7 +148,7 @@ while True:
 
             while True:
                 try:
-                    tipoCombustivel = int(input('\n' + 'ESCOLHA O TIPO DE COMBUSTIVEL:\n'
+                    tipoCombustivel = int(input('\nESCOLHA O TIPO DE COMBUSTIVEL:\n'
                                                 '1 - para ' + lista_TipoCombustivel[1] + '\n'
                                                 '2 - para ' + lista_TipoCombustivel[2] + '\n'
                                                 '3 - para ' + lista_TipoCombustivel[3] + '\n'
@@ -153,22 +160,20 @@ while True:
                     print('\n' + ('-' * 60) + '\nOPÇÃO INVÁLIDA! DIGITE NOVAMENTE.\n' + ('-' * 60))
                     continue
 
-                if tipoCombustivel in range(1, 4):
+                if tipoCombustivel in range(1, 20):
                     print('\n' + ('-' * 60) + '\n' + lista_TipoCombustivel[tipoCombustivel].upper() + '. COMBÚSTIVEL SELECIONADO! BOMBEANDO.\n'
                           'Aguarde, processando...', end=' ')
 
-                    for i in range(0, 6):
+                    for i in range(1, 6):
                         print(i, end=' ')
                         sys.stdout.flush()
                         time.sleep(1)
 
-                    print('\n' + ('-' * 60))
+                    print('\n' + ('-' * 60) + '\n')
 
                     break
 
                 elif tipoCombustivel == 0:
-                    qtdCombustivel = 0
-
                     print('\n' + ('-' * 60) + '\n' + lista_TipoCombustivel[tipoCombustivel].upper() + ' AO MENU INICIAL SELECIONADO!\n'
                           'Aguarde, processando...\n' + ('-' * 60))
 
@@ -178,7 +183,7 @@ while True:
                     print('\n' + ('-' * 60) + '\nOPÇÃO INVÁLIDA! ESCOLHA NOVAMENTE.\n' + ('-' * 60))
                     continue
 
-            if tipoCombustivel:
+            if tipoCombustivel >= 0:
                 break
 
         elif qtdCombustivel == 0:
@@ -194,59 +199,50 @@ while True:
         continue
 
 # MÓDULO 3 - CHECKOUT E ABASTECIMENTO ----------------------------------------------------------
-    if entrada == 1 and bandeira == 1 or entrada == 1 and bandeira == 2:
-        meioPagamento = lista_entrada[entrada] + ' | ' + lista_bandeira[bandeira]
+    if entrada and bandeira == 1 or entrada == 1 and bandeira == 2:
+        meiopagamento = lista_entrada[entrada] + ' | ' + lista_bandeira[bandeira]
 
     else:
-        meioPagamento = lista_entrada[entrada]
+        meiopagamento = lista_entrada[entrada]
 
-    while True:
-        try:
-            print('\n====> C H E C K O U T <====\n'
-                  '---- Meio de pagamento: ' + meioPagamento.upper() + '\n'
-                  '---- Qtd. de galoes de combustivel: ' + str(qtdCombustivel) + '\n' 
-                  '---- Tipo de combustivel: ' + str(lista_TipoCombustivel[tipoCombustivel].upper()) + '\n'
-                  '---- Valor Total da compra: R$ ' + str(float(qtdCombustivel * valorCombustivel)))
+    print('====> C H E C K O U T <====\n'
+          '\n---- Meio de pagamento: ' + meiopagamento.upper() +
+          '\n---- Qtd. de galoes de combustivel: ' + str(qtdCombustivel) +
+          '\n---- Tipo de combustivel: ' + str(lista_TipoCombustivel[tipoCombustivel].upper()) +
+          '\n---- Valor Total da compra: R$ ' + str(float(qtdCombustivel * valorCombustivel)) + '\n')
 
-            checkout = int(input('\n' + 'VOCE CONFIRMA O CHECKOUT?\n'
-                                 '1 - para ' + lista_checkout[1] + '. Posicione a bomba de combústivel.\n'
-                                 '0 -- para ' + lista_checkout[0] + ' ao menu inicial\n'
-                                 'DIGITE A OPÇÃO DESEJADA: '))
+    func3_contador()
 
-        except BaseException:
-            print('\n' + ('-' * 60) + '\nOPÇÃO INVÁLIDA! ESCOLHA NOVAMENTE.\n' + ('-' * 60))
-            continue
+    if func3_entrada == 1:
+        print('\n' + ('-' * 60) + '\nABASTECIMENTO EM ANDAMENTO!\n'
+              'Aguarde, processando...', end=' ')
 
-        if checkout == 1:
-            print('\n' + ('-' * 60) + '\nABASTECIMENTO EM ANDAMENTO!\n'
-                  'Aguarde, processando...', end=' ')
+        for i in range(1, 6):
+            print(i, end=' ')
+            sys.stdout.flush()
+            time.sleep(1)
 
-            for i in range(0, 6):
-                print(i, end=' ')
-                sys.stdout.flush()
-                time.sleep(1)
-
-            break
-
-        elif checkout == 0:
-            print('\n' + ('-' * 60) + '\n' + lista_checkout[checkout].upper() + ' AO MENU INICIAL SELECIONADO!\n'
-                  'Aguarde, processando...\n' + ('-' * 60))
-            break
-
-    if checkout == 0:
+    elif func3_entrada == 0:
+        print('\n' + ('-' * 60) + '\n' + lista_checkout[entrada].upper() + ' AO MENU INICIAL SELECIONADO!\n'
+              'Aguarde, processando...\n' + ('-' * 60))
         continue
+
+    elif func3_entrada == "":
+        print('\n' + ('-' * 60) + '\nSESSÃO EXPIRADA AUTOMATICAMENTE!\n' + ('-' * 60) +
+              '\nOBRIGADO POR UTILIZAR O POSTO DE COMBUSTIVEL! VOLTE SEMPRE!\n' + ('-' * 60))
+        exit(0)
 
 # MÓDULO 4 - FINALIZAÇÃO ----------------------------------------------------------
     print('\n' + ('-' * 60) + '\nABASTECIMENTO FINALIZADO!\n' + ('-' * 60) +
           '\nSEU RECIBO ESTÁ SENDO IMPRESSO.\n'
           'Aguarde, processando...', end=' ')
 
-    for i in range(0, 6):
-            print(i, end=' ')
-            sys.stdout.flush()
-            time.sleep(1)
+    for i in range(1, 6):
+        print(i, end=' ')
+        sys.stdout.flush()
+        time.sleep(1)
 
-    print('\n' + ('-' * 60))
+    print('\n' + ('-' * 60) + '\nOBRIGADO POR UTILIZAR O POSTO DE COMBUSTIVEL! VOLTE SEMPRE!\n' + ('-' * 60))
 
     while True:
         try:
