@@ -17,8 +17,11 @@ BLOCOS DE TRANSIÇÃO: <br>
 ## PRÉ-REQUISITOS
 * PYTHON 3 OU SUPERIOR
 
-## MODELO DO PROJETO
+## MODELO CLIENTE
 ![](app_resources/modelo_projeto.png)
+
+## MAPA MENTAL
+![](app_resources/mapa_mental.png)
 
 ## CONDIÇÕES DE TESTE (CT) E CASOS DE TESTE (CAT) 
 ### CT_01
