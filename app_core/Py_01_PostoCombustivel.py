@@ -1,25 +1,21 @@
 # MÓDULO 1 - PROGRAMA
 import datetime, sys, time, os
-import multiprocessing.process
-from multiprocessing import Process
 
 from typing import List
-from app_utils.funcao_03_checkout import contador as func3_contador
-from app_utils.funcao_03_checkout import entrada_usuario as func3_entrada
-
+from app_utils.funcao_03_checkout import contador
 
 # VARS
 entrada = None
 bandeira = None
 notas = None
 qtdCombustivel = None
-valorCombustivel = float(20)
+valorCombustivel = float(25.0)
 tipoCombustivel = None
 meioPagamento = None
 decisao = None
 
 # LISTAS
-lista_entrada: List[str] = ["", "Cartão", "Dinheiro", "QR Code"]
+lista_entrada: List[str] = ["","Cartão", "Dinheiro", "QR Code"]
 lista_bandeira: List[str] = ["Voltar", "MasterCard", "Visa"]
 lista_notas = ["Voltar", "Sim", 20, 50, 100]
 lista_qtdCombustivel = ["Voltar", 1, 20]
@@ -39,16 +35,17 @@ while True:
 
     try:
         entrada = int(input('\nESCOLHA UMA FORMA DE PAGAMENTO:\n'
-                            '1 - para ' + lista_entrada[0] + ' (MasterCard ou Visa)\n'
-                            '2 - para ' + lista_entrada[1] + '\n'
-                            '3 - para ' + lista_entrada[2] + '\n'
+                            '1 - para ' + lista_entrada[1] + ' (MasterCard ou Visa)\n'
+                            '2 - para ' + lista_entrada[2] + '\n'
+                            '3 - para ' + lista_entrada[3] + '\n'
                             'DIGITE A OPÇÃO DESEJADA: '))
 
     except BaseException:
         print('\n' + ('-' * 60) + '\nOPÇÃO INVÁLIDA! ESCOLHA NOVAMENTE.\n' + ('-' * 60))
         continue
 
-    # SE CARTÃO, ESCOLHE BANDEIRA
+    # SE CARTÃO, ESCOLHE BANDEIR
+
     if entrada == 1:
         print('\n' + ('-' * 60) + '\n' + lista_entrada[entrada].upper() + ' SELECIONADO!\n'
               'Aguarde, processando...\n' + ('-' * 60))
@@ -69,6 +66,9 @@ while True:
                 elif bandeira == 0:
                         print('\n' + ('-' * 60) + '\n' + lista_bandeira[bandeira].upper() + ' AO MENU INICIAL SELECIONADO!\n'
                               'Aguarde, processando...\n' + ('-' * 60))
+
+                        os.system('clear')
+
                         break
 
                 else:
@@ -104,6 +104,9 @@ while True:
                     elif notas == 0:
                         print('\n' + ('-' * 60) + '\n' + lista_notas[notas].upper() + ' AO MENU INICIAL SELECIONADO!\n'
                               'Aguarde, processando...\n' + ('-' * 60))
+
+                        os.system('clear')
+
                         break
 
                     else:
@@ -134,7 +137,7 @@ while True:
                   '--> Consulta realizada em ' + str(data.strftime('%d-%m-%Y')) + ' ás ' + str(horario.strftime('%H:%M')) + '\n'
                   '--> Preço do galão (hoje): R$' + str(valorCombustivel) + '\n')
 
-            qtdCombustivel = int(input(str(lista_qtdCombustivel[1]) + ' a ' + str(lista_qtdCombustivel[2]) + ' para informar a quantidade\n' +
+            qtdCombustivel = int(input(str(lista_qtdCombustivel[1]) + ' a ' + str(lista_qtdCombustivel[2]) + ' - para informar a quantidade de galões de combústivel\n' +
                                            '0 -- para ' + str(lista_qtdCombustivel[0]) + ' ao menu inicial\n'
                                            'DIGITE A OPÇÃO DESEJADA: '))
 
@@ -160,7 +163,7 @@ while True:
                     print('\n' + ('-' * 60) + '\nOPÇÃO INVÁLIDA! DIGITE NOVAMENTE.\n' + ('-' * 60))
                     continue
 
-                if tipoCombustivel in range(1, 20):
+                if tipoCombustivel in range(1, 5):
                     print('\n' + ('-' * 60) + '\n' + lista_TipoCombustivel[tipoCombustivel].upper() + '. COMBÚSTIVEL SELECIONADO! BOMBEANDO.\n'
                           'Aguarde, processando...', end=' ')
 
@@ -177,6 +180,8 @@ while True:
                     print('\n' + ('-' * 60) + '\n' + lista_TipoCombustivel[tipoCombustivel].upper() + ' AO MENU INICIAL SELECIONADO!\n'
                           'Aguarde, processando...\n' + ('-' * 60))
 
+                    os.system('clear')
+
                     break
 
                 else:
@@ -189,6 +194,9 @@ while True:
         elif qtdCombustivel == 0:
             print('\n' + ('-' * 60) + '\n' + lista_qtdCombustivel[qtdCombustivel].upper() + ' AO MENU INICIAL SELECIONADO!\n'
                   'Aguarde, processando...\n' + ('-' * 60))
+
+            os.system('clear')
+
             break
 
         else:
@@ -209,11 +217,12 @@ while True:
           '\n---- Meio de pagamento: ' + meiopagamento.upper() +
           '\n---- Qtd. de galoes de combustivel: ' + str(qtdCombustivel) +
           '\n---- Tipo de combustivel: ' + str(lista_TipoCombustivel[tipoCombustivel].upper()) +
-          '\n---- Valor Total da compra: R$ ' + str(float(qtdCombustivel * valorCombustivel)) + '\n')
+          '\n---- Valor Total da compra: R$ ' + str(float(valorCombustivel * qtdCombustivel)) + '\n')
 
-    func3_contador()
+    """ Créditos Murilio Augusto https://www.facebook.com/murilo.a98"""
+    checkout = contador()
 
-    if func3_entrada == 1:
+    if checkout == 1:
         print('\n' + ('-' * 60) + '\nABASTECIMENTO EM ANDAMENTO!\n'
               'Aguarde, processando...', end=' ')
 
@@ -222,12 +231,15 @@ while True:
             sys.stdout.flush()
             time.sleep(1)
 
-    elif func3_entrada == 0:
-        print('\n' + ('-' * 60) + '\n' + lista_checkout[entrada].upper() + ' AO MENU INICIAL SELECIONADO!\n'
+    elif checkout == 0:
+        print('\n' + ('-' * 60) + '\n' + lista_checkout[0].upper() + ' AO MENU INICIAL SELECIONADO!\n'
               'Aguarde, processando...\n' + ('-' * 60))
+
+        os.system('clear')
+
         continue
 
-    elif func3_entrada == "":
+    else:
         print('\n' + ('-' * 60) + '\nSESSÃO EXPIRADA AUTOMATICAMENTE!\n' + ('-' * 60) +
               '\nOBRIGADO POR UTILIZAR O POSTO DE COMBUSTIVEL! VOLTE SEMPRE!\n' + ('-' * 60))
         exit(0)
@@ -258,6 +270,9 @@ while True:
         if 1 == decisao:
             print('\n' + ('-' * 60) + '\n' + lista_decisao[decisao].upper() + ' AO MENU INICIAL SELECIONADO!\n'
                   'Aguarde, processando...\n' + ('-' * 60))
+
+            os.system('clear')
+
             break
 
         elif 0 == decisao:
@@ -268,6 +283,7 @@ while True:
             continue
 
     if decisao == 1:
+        os.system('clear')
         continue
 
     else:

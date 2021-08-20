@@ -2,7 +2,7 @@
 Título: LABORATÓRIO PYTHON - PRÁTICA 1
 Autor: MAURILIO CARDOSO GONÇALVES
 Data: 28/07/21
-output: html document
+Sistema Operacional: Unix Like
 ```
 ---
 BLOCOS DE TRANSIÇÃO: <br>
@@ -16,6 +16,7 @@ BLOCOS DE TRANSIÇÃO: <br>
 # LABORATÓRIO PYTHON - POSTO DE COMBÚSTIVEL
 ## PRÉ-REQUISITOS
 * PYTHON 3 OU SUPERIOR
+* S.O UNIX LIKE 
 
 ## MODELO CLIENTE
 ![](app_resources/modelo_projeto.png)

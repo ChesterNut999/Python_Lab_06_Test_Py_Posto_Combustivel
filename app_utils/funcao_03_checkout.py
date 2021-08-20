@@ -49,8 +49,9 @@ def posicao() -> tuple:
 
 
 def contagem(num: int, pos: tuple):
+    time.sleep(0.3)
     for i in reversed(range(1, num + 1)):
-        sys.stdout.write("\x1b7\x1b[%d;%df%s\x1b8" % (pos[0], pos[1], f'====> ESTA SESSÃO SERÁ ENCERRADA EM {str(i).zfill(2)} SEGUNDOS <====\n'))
+        sys.stdout.write("\x1b7\x1b[%d;%df%s\x1b8" % (pos[0]-5, pos[1], f'====> ESTA SESSÃO SERÁ ENCERRADA EM {str(i).zfill(2)} SEGUNDOS <===='))
         sys.stdout.flush()
         time.sleep(1)
 
@@ -60,7 +61,7 @@ def entrada_usuario(fileno: int, retorno: dict, contagem_obj: Process) -> None:
        no dicionário "retorno".
 
     Args:
-=        fileno (int): File descriptor (nesse caso o stdin).
+        fileno (int): File descriptor (nesse caso o stdin).
         retorno (dict): Dicionário "compartilhado". Salvaremos a entrada do usuário aqui.
     """
 
@@ -68,7 +69,7 @@ def entrada_usuario(fileno: int, retorno: dict, contagem_obj: Process) -> None:
 
     while True:
         try:
-            retorno['entrada'] = int(input('\nVOCE CONFIRMA O CHECKOUT?'
+            retorno['entrada'] = int(input('\n\nVOCE CONFIRMA O CHECKOUT?'
                                            '\n1 - para Sim. Abasteça!'
                                            '\n0 -- para Voltar ao menu inicial'
                                            '\nDIGITE A OPÇÃO DESEJADA: '))
@@ -78,11 +79,11 @@ def entrada_usuario(fileno: int, retorno: dict, contagem_obj: Process) -> None:
                 break
 
             else:
-                print('\n' + ('-' * 60) + '\nOPÇÃO INVÁLIDA! ESCOLHA NOVAMENTE.\n' + ('-' * 60))
+                print('\n' + ('-' * 60) + '\nOPÇÃO INVÁLIDA! ESCOLHA NOVAMENTE.\n' + ('-' * 60) + '\n')
                 continue
 
         except BaseException:
-            print('\n' + ('-' * 60) + '\nOPÇÃO INVÁLIDA! ESCOLHA NOVAMENTE.\n' + ('-' * 60))
+            print('\n' + ('-' * 60) + '\nOPÇÃO INVÁLIDA! ESCOLHA NOVAMENTE.\n' + ('-' * 60) + '\n')
             continue
 
 
@@ -97,7 +98,7 @@ def timeout(process: Process):
 
 def contador():
     # Dessa vez vamos definir o timeout aqui em cima. (em segundos)
-    timeout_value = 10
+    timeout_value = 21
 
     # Aqui precisamos pegar o file descriptor 'stdin' para depois passarmos
     # para a função "entrada_usuario". Como ela está em outro processo, não
@@ -137,5 +138,4 @@ def contador():
     # Após o término do processo (natural ou forçado), cancelamos nosso timer. (afinal, não precisaremos mais dele)
     t.cancel()
 
-# if __name__ == '__main__':
-#     contador()
+    return retorno.get('entrada')
